@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Activity } from '../../model/Activity.model';
 import { ActivityService } from '../../services/activity/activity.service';
 import { Table } from 'primeng/table';
-import { DialogService } from 'primeng/dynamicdialog';
+import {DialogService, DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { AddActivityComponent } from '../../components/add-activity/add-activity.component';
 
 @Component({
@@ -71,17 +71,21 @@ import { AddActivityComponent } from '../../components/add-activity/add-activity
     </div>
   `,
   styles: [],
-  providers: [DialogService],
+  providers: [DialogService,DynamicDialogConfig],
 })
 export class ActivitesComponent implements OnInit {
   @ViewChild('dt') dt!: Table;
   activities: Activity[] = [];
   selectedActivities: Activity[] = [];
+  check : boolean = false ;
 
-  constructor(private activityService: ActivityService, private dialogService: DialogService) {}
+  constructor(private activityService: ActivityService, private dialogService: DialogService ,  public config: DynamicDialogConfig) {}
 
   ngOnInit(): void {
     this.activities = this.activityService.getActivities();
+    if (this.config.data?.checkParametres !== undefined) {
+      this.check = this.config.data.checkParametres;
+    }
   }
 
   filterGlobal(event: EventTarget | null, filterParam: string) {
@@ -93,8 +97,8 @@ export class ActivitesComponent implements OnInit {
     this.dialogService.open(AddActivityComponent, {
       data: { checkUpdate: false },
       header: 'Add Activity',
-      width: '70%',
-      height: '70%',
+      width: this.check ?'70%' : '40%',
+      height: this.check ?'70%' : '50%',
     });
   }
 
@@ -102,8 +106,8 @@ export class ActivitesComponent implements OnInit {
     this.dialogService.open(AddActivityComponent, {
       data: { checkUpdate: true, id : activity.id},
       header: 'Edit Activity',
-      width: '70%',
-      height: '70%',
+      width: this.check ?'70%' : '40%',
+      height: this.check ?'70%' : '50%',
     });
   }
 

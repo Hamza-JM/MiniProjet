@@ -35,10 +35,21 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
         <textarea id="note" pInputTextarea [(ngModel)]="formData.note"></textarea>
       </div>
 
+
       <div class="p-field p-col-12">
-        <label for="documents">Documents</label>
-        <input id="documents" type="file" (change)="onFileSelected($event)" multiple>
+        <label for="fileUpload">Document</label>
+        <p-fileUpload
+          id="fileUpload"
+          mode="advanced"
+          name="documents"
+          accept=".pdf,.doc,.docx,.png,.jpg"
+          (onSelect)="onFileSelected($event)"
+          chooseLabel="Parcourir"
+
+        ></p-fileUpload>
       </div>
+
+
 
       <p-toolbar class="p-mb-4">
         <ng-template pTemplate="left">

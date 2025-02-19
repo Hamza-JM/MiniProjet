@@ -19,7 +19,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
-import {FormsModule} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ConfirmationService} from "primeng/api";
 import { AddContactComponent } from './components/add-contact/add-contact.component';
 import {DropdownModule} from "primeng/dropdown";
@@ -32,6 +32,9 @@ import {MessageModule} from 'primeng/message';
 import { AddActivityComponent } from './components/add-activity/add-activity.component';
 import {MultiSelectModule} from "primeng/multiselect";
 
+import {HttpClientModule} from "@angular/common/http";
+import {FileUploadModule} from "primeng/fileupload";
+
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import {MultiSelectModule} from "primeng/multiselect";
     HomeComponent,
     AddContactComponent,
     AddActivityComponent,
+
 
   ],
   imports: [
@@ -65,7 +69,13 @@ import {MultiSelectModule} from "primeng/multiselect";
     DynamicDialogModule,
     MessageModule,
     MessagesModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FileUploadModule
+
+
+
 
 
 
